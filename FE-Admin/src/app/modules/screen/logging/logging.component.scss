@@ -1,0 +1,12 @@
+.container {
+    background-color: #fff;
+    .logs-screen {
+        font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+        background: none;
+
+        .list-group-item {
+            padding-top: 3px;
+            padding-bottom: 3px;
+        }
+    }
+}

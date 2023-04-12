@@ -1,0 +1,193 @@
+<h1 mat-dialog-title>Property Detail</h1>
+<mat-dialog-content class="mat-typography">
+  <div class="dialog-content">
+    <div class="form-group row">
+      <div class="col-sm-12 full-width">
+        <mat-accordion class="full-width">
+          <mat-expansion-panel hideToggle>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Address
+              </mat-panel-title>
+              <mat-panel-description>
+                {{propertySelected.address + ', ' + propertySelected.wards.name 
+                  + ', ' + propertySelected.wards.district.name 
+                  + ', ' + propertySelected.wards.district.city.name}}
+              </mat-panel-description>
+              <mat-icon>map</mat-icon>
+            </mat-expansion-panel-header>
+            <div class="form-group row">
+              <div class="col-sm-6">
+                <div class="col-sm-12">
+                  <mat-form-field class="full-width">
+                    <mat-label>Address</mat-label>
+                    <input matInput disabled value="{{propertySelected.address}}">
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-12">
+                  <mat-form-field class="full-width">
+                    <mat-label>Wards</mat-label>
+                    <input matInput disabled value="{{propertySelected.wards.name}}">
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-12">
+                  <mat-form-field class="full-width">
+                    <mat-label>Wards</mat-label>
+                    <input matInput disabled value="{{propertySelected.wards.district.name}}">
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-12">
+                  <mat-form-field class="full-width">
+                    <mat-label>Wards</mat-label>
+                    <input matInput disabled value="{{propertySelected.wards.district.city.name}}">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <agm-map class="full-width" [latitude]="propertySelected.lat" [longitude]="propertySelected.lng">
+                  <agm-marker [latitude]="propertySelected.lat" [longitude]="propertySelected.lng"></agm-marker>
+                </agm-map>
+              </div>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-12">
+        <mat-form-field class="full-width">
+          <mat-label>Title</mat-label>
+          <input matInput disabled value="{{propertySelected.title}}">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-4">
+        <mat-form-field class="full-width">
+          <mat-label>Property category</mat-label>
+          <input matInput disabled value="{{propertySelected.propertyCategory.name}}">
+        </mat-form-field>
+      </div>
+      <div class="col-sm-4">
+        <mat-form-field class="full-width">
+          <mat-label>Rental type</mat-label>
+          <input matInput disabled value="{{propertySelected.rentalType.name}}">
+        </mat-form-field>
+      </div>
+      <div class="col-sm-4">
+        <mat-form-field class="full-width">
+          <mat-label>Status</mat-label>
+          <input matInput disabled placeholder="Ex. Pizza" value="Sushi">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="form-group row" *ngIf="propertySelected.rentalType.id == 2 || propertySelected.rentalType.id == 4">
+      <div class="col-sm-6">
+        <mat-form-field class="full-width">
+          <mat-label>Acreage</mat-label>
+          <input matInput disabled value="{{propertySelected.acreage}} m²">
+        </mat-form-field>
+      </div>
+      <div class="col-sm-6">
+        <mat-form-field class="full-width">
+          <mat-label>Price</mat-label>
+          <input matInput disabled mvndrMatCurrencyFormat [allowNegative]="false" [currencyCode]="'VND'"
+            value="{{propertySelected.price}}">
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="form-group row" *ngIf="propertySelected.rentalType.id == 1 || propertySelected.rentalType.id == 3">
+      <div class="col-sm-6">
+        <mat-form-field class="full-width">
+          <mat-label>Acreage from</mat-label>
+          <input matInput disabled value="{{propertySelected.acreageFrom}}">
+        </mat-form-field>
+      </div>
+      <div class="col-sm-6">
+        <mat-form-field class="full-width">
+          <mat-label>Acreage to</mat-label>
+          <input matInput disabled value="{{propertySelected.acreageTo}}">
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="form-group row" *ngIf="propertySelected.rentalType.id == 1 || propertySelected.rentalType.id == 3">
+      <div class="col-sm-6">
+        <mat-form-field class="full-width">
+          <mat-label>Price from</mat-label>
+          <input matInput disabled mvndrMatCurrencyFormat [allowNegative]="false" [currencyCode]="'VND'"
+            value="{{propertySelected.priceFrom}}">
+        </mat-form-field>
+      </div>
+      <div class="col-sm-6">
+        <mat-form-field class="full-width">
+          <mat-label>Price to</mat-label>
+          <input matInput disabled mvndrMatCurrencyFormat [allowNegative]="false" [currencyCode]="'VND'"
+            value="{{propertySelected.priceTo}}">
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="form-group row" *ngIf="countImages!=0">
+      <div class="col-sm-12">
+        <app-edit-property-image [property]="propertySelected" [images]="propertySelected.propertyImages">
+        </app-edit-property-image>
+      </div>
+    </div>
+
+    <div class="form-group row" *ngIf="countImages==0">
+      <div class="col-sm-12">
+        <h5>This post does not include image</h5>
+      </div>
+    </div>
+
+    <div class="form-group row" *ngIf="propertySelected.propertyFeatures.length != 0">
+      <div class="col-sm-12">
+        <mat-form-field class="full-width">
+          <mat-label>
+            Features
+          </mat-label>
+          <mat-chip-list aria-label="Fish selection">
+            <mat-chip *ngFor="let propertyFeature of propertySelected.propertyFeatures">{{propertyFeature.feature.name}}
+            </mat-chip>
+          </mat-chip-list>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-sm-6">
+        <mat-form-field class="full-width">
+          <mat-label>Date created</mat-label>
+          <input matInput disabled [matDatepicker]="dateCreated" [value]="propertySelected.dateCreated">
+          <mat-datepicker-toggle matSuffix [for]="dateCreated"></mat-datepicker-toggle>
+          <mat-datepicker #dateCreated></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-6">
+        <mat-form-field class="full-width">
+          <mat-label>Date modified</mat-label>
+          <input matInput disabled [matDatepicker]="dateModified" [value]="propertySelected.dateCreated">
+          <mat-datepicker-toggle matSuffix [for]="dateModified"></mat-datepicker-toggle>
+          <mat-datepicker #dateModified></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="form-gorup row">
+      <button mat-button color="primary" aria-label="View property's comment" (click)="isLoadComment = !isLoadComment">
+        View all comment <span class="fa fa-comments"></span>
+      </button>
+    </div>
+    <div class="form-group row pl-5 pr-5" *ngIf="isLoadComment">
+      <app-property-comment-dialog class="col-12" [property]="propertySelected">
+
+      </app-property-comment-dialog>
+    </div>
+  </div>
+
+</mat-dialog-content>
+
+<div mat-dialog-actions>
+  <button mat-flat-button color="warn" mat-button (click)="onNoClick()">Close</button>
+</div>

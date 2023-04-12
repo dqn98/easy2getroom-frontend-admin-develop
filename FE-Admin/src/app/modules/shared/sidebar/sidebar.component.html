@@ -1,0 +1,31 @@
+<perfect-scrollbar style="max-width: 100%;" [config]="config">
+    <div>
+        <mat-nav-list>
+            <div class="profile-card">
+                <div class="header">
+                    <h4>Welcome admin</h4>
+                    <h4 style="color: #007bff;"><b>{{fullName}}</b></h4>
+                </div>
+                <img src="{{avatar}}" alt="">
+            </div>
+            <mat-divider></mat-divider>
+            <a mat-list-item routerLinkActive="list-item-active" routerLink="/">
+                <mat-icon>import_contacts</mat-icon>
+                Dashboards
+            </a>
+            <mat-divider></mat-divider>
+
+            <mat-selection-list [multiple]="false">
+                <mat-list-option *ngFor="let function of functions">
+                    <a mat-list-item routerLinkActive="list-item-active" routerLink="/{{function.url}}">
+                        <span class="fa {{function.iconCss}} mr-2"></span>
+                        {{function.name}}
+                    </a>
+                </mat-list-option>
+            </mat-selection-list>
+
+            <mat-divider></mat-divider>
+        </mat-nav-list>
+
+    </div>
+</perfect-scrollbar>

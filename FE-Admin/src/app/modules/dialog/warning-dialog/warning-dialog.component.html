@@ -1,0 +1,21 @@
+<form [formGroup]="warningFrom" (ngSubmit)="send()">
+    <h3>Send warning announcement</h3>
+
+    <div class="form-group row">
+        <div class="col-12">
+            <mat-checkbox formControlName="type" [checked]="true" class="mx-2 mb-2">Type: Warning <mat-icon
+                    color='warn'>report_problem</mat-icon>
+            </mat-checkbox>
+            <mat-form-field class="col-12">
+                <mat-label>Content </mat-label>
+                <input matInput placeholder="Content" formControlName="content"
+                    [ngClass]="{'is-invalid': warningFrom.get('content').errors}">
+                <div class="invalid-feedback">Content is required</div>
+            </mat-form-field>
+        </div>
+        <div class="col-12 text-right">
+            <button mat-flat-button class="mx-2" color="warn" (click)="onClose()">Cancel</button>
+            <button mat-flat-button class="mr-3" color="primary" cdkFocusInitial type="submit">Send</button>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,44 @@
+<div class="container full-width">
+  <div class="row full-width">
+    <div class="col-md-12" *ngFor="let comment of comments">
+      <div class="post-content full-width">
+        <div class="post-container">
+          <img src="{{comment.user.avatar}}" alt="user" class="profile-photo-md pull-left">
+          <div class="post-detail">
+            <div class="user-info">
+              <h5>{{comment.user.fullName}}
+                <span *ngIf="comment.user.roleName == 'Admin'" class="badge badge-info ml-2">Admin</span>
+                <span *ngIf="comment.user.roleName == 'Client'" class="badge badge-success ml-2">Client</span>
+              </h5>
+              <p class="text-muted">Published at {{comment.dateCreated | date}}</p>
+            </div>
+            <div class="line-divider"></div>
+            <div class="post-text">
+              <p>{{comment.content}}</p>
+              <button mat-button style="margin: 0 !important; padding: 0 !important;" color="primary" (click)="reply(comment)">Reply</button>
+            </div>
+            <div class="line-divider"></div>
+            <div *ngIf="comment.childComments">
+              <div class="post-comment" *ngFor="let child of comment.childComments">
+                <img src="{{child.user.avatar}}" alt="user" class="profile-photo-md pull-left">
+                <div class="post-comment-detail full-width">
+                  <div class="user-info">
+                    <h5>{{child.user.fullName}}
+                      <span *ngIf="child.user.roleName == 'Admin'" class="badge badge-info ml-2">Admin</span>
+                      <span *ngIf="child.user.roleName == 'Client'" class="badge badge-success ml-2">Client</span>
+                    </h5>
+                    <p class="text-muted">Published at {{child.dateCreated | date}}</p>
+                  </div>
+                  <div class="line-divider"></div>
+                  <div class="post-text">
+                    <p>{{child.content}}</p>
+                  </div>
+                  <div class="line-divider"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

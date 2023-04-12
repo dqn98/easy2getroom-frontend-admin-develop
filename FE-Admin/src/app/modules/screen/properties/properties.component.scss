@@ -1,0 +1,32 @@
+.filter-component {
+    background-color: #feeada;
+    position: absolute;
+    z-index: 1000;
+    margin: 2px 20px 0 20px;
+}
+table {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    min-width: 500px;
+    margin-bottom: 50px;
+    th.mat-header-cell {
+        text-align: left;
+        max-width: 300px;
+    }
+}
+.max-width {
+    width: 100%;
+}
+.loading-shade {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.15);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

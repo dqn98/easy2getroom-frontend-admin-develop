@@ -1,0 +1,54 @@
+<mat-toolbar>
+    <h2>Features</h2>
+</mat-toolbar>
+<div class="form-group row">
+    <div class="col-sm-4" style="height: 400px;">
+        <mat-form-field class="max-width filter-input">
+            <mat-label>Filter</mat-label>
+            <input matInput type="text" [(ngModel)]="keywordFilter" (change)="refresh()">
+            <button mat-button *ngIf="keywordFilter" matSuffix mat-icon-button aria-label="Clear"
+                (click)="keywordFilter=''">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+        <perfect-scrollbar style="max-width: 100%; max-height: 100%;" [config]="config">
+            <mat-selection-list #featuresList [multiple]="false">
+                <mat-list-option *ngFor="let feature of features" [value]="feature.id" (click)="select(feature.id)">
+                    {{feature.name}}
+                </mat-list-option>
+            </mat-selection-list>
+        </perfect-scrollbar>
+        <div class="row pl-3 mt-2">
+            <button mat-stroked-button color="primary" class="mr-2" (click)="add()">Add
+                <mat-icon>add_circle</mat-icon>
+            </button>
+            <button mat-stroked-button (click)="edit()" [disabled]="!isSelected" class="mr-2">Edit
+                <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-stroked-button color="warn" (click)="delete()" [disabled]="!isSelected">Delete
+                <mat-icon>delete</mat-icon>
+            </button>
+        </div>
+    </div>
+    <div class="col-sm-8" style="height: 400px;">
+        <div class="form-container max-width" *ngIf="isAdd || isEdit">
+            <form [formGroup]="featureForm" (submit)="save()">
+                <div class="col-sm-12">
+                    <mat-form-field class="max-width" appearance="legacy">
+                        <mat-label> Name
+                        </mat-label>
+                        <input matInput formControlName="name">
+                        <mat-error *ngIf="featureForm.controls.name.touched && featureForm.controls.name.invalid">
+                            <span *ngIf="featureForm.controls.name.errors.required">This field is mandatory.</span>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-sm-12 text-right">
+                    <button mat-raised-button color="primary" type="submit" class="mr-2">Save</button>
+                    <button mat-raised-button color="warn" (click)="isAdd=!isAdd">Cance</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

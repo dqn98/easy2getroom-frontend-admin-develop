@@ -1,0 +1,16 @@
+<mat-accordion>
+    <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Images
+            </mat-panel-title>
+            <mat-panel-description>
+                View all property images
+            </mat-panel-description>
+            <mat-icon>insert_photo</mat-icon>
+        </mat-expansion-panel-header>
+        <div class="d-flex justify-content-center">
+            <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
+        </div>      
+    </mat-expansion-panel>
+</mat-accordion>
